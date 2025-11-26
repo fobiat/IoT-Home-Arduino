@@ -1,0 +1,41 @@
+# Arduino Build Artifacts
+build/
+*.o
+*.a
+*.so
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+env/
+venv/
+
+# System
+.DS_Store
+Thumbs.db
+
+# Arduino Sketch Backup
+*.cpp.o
+*.hex
+
+# Serial Monitor Logs
+*.log
+
+# Credentials (never commit!)
+secrets.h
+credentials.h
+.env
+password.txt
+
+# Temporary
+*.tmp
+*.temp
