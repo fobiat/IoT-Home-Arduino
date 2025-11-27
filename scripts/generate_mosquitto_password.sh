@@ -40,16 +40,12 @@ mkdir -p "$(dirname "$OUT_FILE")"
 
 # Prefer to use mosquitto_passwd if available. We'll pipe the password to avoid putting it in argv.
 if command -v mosquitto_passwd >/dev/null 2>&1; then
-  printf "%s\n%s\n" "$MQTT_PASS_VAL" "$MQTT_PASS_VAL" | mosquitto_passwd -c -U -p -b "$OUT_FILE" "$MQTT_USER_VAL" 2>/dev/null || true
-  # Fallback invocation: use the interactive mode if the platform's mosquitto_passwd
-  # doesn't accept -p/-b flags the same way (some versions differ).
-  if [ ! -s "$OUT_FILE" ]; then
-    printf "%s\n%s\n" "$MQTT_PASS_VAL" "$MQTT_PASS_VAL" | mosquitto_passwd -c "$OUT_FILE" "$MQTT_USER_VAL"
-  fi
+  # Use mosquitto_passwd non-interactively to create a hashed password entry.
+  # Use the -b flag (non-interactive: mosquitto_passwd file user password).
+  mosquitto_passwd -b -c "$OUT_FILE" "$MQTT_USER_VAL" "$MQTT_PASS_VAL"
 else
-  # If mosquitto_passwd is not available, create a simple plaintext file (NOT recommended for production).
-  echo "mosquitto_passwd not found; creating plaintext password file (insecure)" >&2
-  echo "$MQTT_USER_VAL:$MQTT_PASS_VAL" > "$OUT_FILE"
+  echo "Error: mosquitto_passwd not found. Install mosquitto/mosquitto-clients and re-run this script." >&2
+  exit 1
 fi
 
 # Tighten permissions
