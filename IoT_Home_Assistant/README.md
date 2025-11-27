@@ -69,6 +69,14 @@ Local safety: pre-commit hook
 
 ```bash
 git config core.hooksPath .githooks
+
+Or run the provided script from the repo root to install hooks for this checkout:
+
+```bash
+./scripts/install-hooks.sh
+```
+
+This will make the pre-commit hook active locally and prevent accidental commits of `secrets.h`.
 ```
 
 This will make Git run the included hook locally, further protecting against accidental commits of private files.

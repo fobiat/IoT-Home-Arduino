@@ -27,12 +27,13 @@ jobs:
           arduino-cli core install arduino:renesas_uno
           arduino-cli lib update-index
           # Install required libraries for reproducible builds
-          arduino-cli lib install PubSubClient
-          arduino-cli lib install "Adafruit BMP280 Library"
-          arduino-cli lib install "Adafruit Unified Sensor"
-          arduino-cli lib install "DHT sensor library"
-          arduino-cli lib install MPU6050
-          arduino-cli lib install "LiquidCrystal I2C"
+          # Pin library versions for reproducible builds
+          arduino-cli lib install PubSubClient@2.8.0
+          arduino-cli lib install "Adafruit BMP280 Library@2.6.8"
+          arduino-cli lib install "Adafruit Unified Sensor@1.1.15"
+          arduino-cli lib install "DHT sensor library@1.4.6"
+          arduino-cli lib install MPU6050@1.4.4
+          arduino-cli lib install "LiquidCrystal I2C@1.1.2"
           # If CI secrets are provided, create a local secrets.h for the build
           if [ -n "${{ secrets.WIFI_SSID }}" ] || [ -n "${{ secrets.MQTT_PASSWORD }}" ]; then
             mkdir -p IoT_Home_Assistant
