@@ -279,3 +279,31 @@ client.subscribe("home/arduino/control/relay4");
 **Time to Full Functionality:** 30 minutes
 
 You got this! 🚀
+
+---
+
+## Run Home Assistant with Docker Compose
+
+If you prefer running Home Assistant in Docker, this repo includes a simple compose file and an optional override that runs a local Mosquitto MQTT broker for testing.
+
+Start Home Assistant only:
+
+```bash
+mkdir -p homeassistant/config
+docker compose -f docker-compose.homeassistant.yml up -d
+```
+
+Start Home Assistant with a local Mosquitto broker (recommended for local testing):
+
+```bash
+mkdir -p mqtt/config mqtt/data mqtt/log
+# optionally add mqtt/config/mosquitto.conf to configure authentication/websockets
+docker compose -f docker-compose.homeassistant.yml -f docker-compose.override.yml up -d
+```
+
+Visit Home Assistant at `http://<host-ip>:8123` after it finishes starting.
+
+Notes:
+- `docker-compose.override.yml` brings up an `eclipse-mosquitto` service bound to port `1883`.
+- For production, secure MQTT with passwords and TLS and don't expose ports unnecessarily.
+

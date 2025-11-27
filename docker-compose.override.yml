@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  mosquitto:
+    image: eclipse-mosquitto:2.0
+    container_name: mosquitto
+    restart: unless-stopped
+    volumes:
+      - ./mqtt/config:/mosquitto/config:rw
+      - ./mqtt/data:/mosquitto/data:rw
+      - ./mqtt/log:/mosquitto/log:rw
+    ports:
+      - "1883:1883"   # MQTT broker
+      - "9001:9001"   # Websockets (if enabled in config)
+
+# Notes:
+# - Create the directories `mqtt/config`, `mqtt/data`, and `mqtt/log` before starting.
+# - Provide a `mosquitto.conf` in `mqtt/config` if you want custom authentication or websockets.
+# - To run Home Assistant + Mosquitto together use:
+#
+#   docker compose -f docker-compose.homeassistant.yml -f docker-compose.override.yml up -d
