@@ -1,0 +1,33 @@
+# Docker Compose for Home Assistant Container
+#
+# - Uses host networking for discovery (recommended for most users).
+# - Mounts `./homeassistant/config` for persistent configuration.
+# - Maps common serial device paths as examples; remove or adjust as needed.
+# - Set `TZ` to your timezone (e.g., Europe/London or America/New_York).
+
+version: "3.8"
+
+services:
+  homeassistant:
+    container_name: homeassistant
+    image: ghcr.io/home-assistant/home-assistant:stable
+    volumes:
+      - ./homeassistant/config:/config
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - TZ=UTC
+    restart: unless-stopped
+    network_mode: host
+    # Example device mounts (uncomment the ones you need)
+    # devices:
+    #   - /dev/ttyUSB0:/dev/ttyUSB0
+    #   - /dev/ttyACM0:/dev/ttyACM0
+    # If you need additional capabilities for certain integrations, you can
+    # add them here. Use with caution.
+    # cap_add:
+    #   - NET_ADMIN
+
+# Usage:
+# 1. Create the config directory: `mkdir -p homeassistant/config`
+# 2. Run: `docker compose -f docker-compose.homeassistant.yml up -d`
+# 3. Visit Home Assistant at http://<host-ip>:8123
