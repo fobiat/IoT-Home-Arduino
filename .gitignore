@@ -9,6 +9,12 @@ build/
 .vscode/
 .idea/
 *.swp
+.idea/
+
+# Ignore local secret files for Arduino sketches
+IoT_Home_Assistant/secrets.h
+arduino/secrets.h
+secrets.h
 *.swo
 *~
 

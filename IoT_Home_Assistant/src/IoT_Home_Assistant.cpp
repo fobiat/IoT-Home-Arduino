@@ -18,13 +18,41 @@ void publishSensorData();
 void updateDisplay();
 void checkButtons();
 
-// WiFi Configuration
-const char* ssid = "YOUR_SSID";
-const char* password = "YOUR_PASSWORD";
-const char* mqtt_server = "192.168.1.X";  // Home Assistant IP
-const int mqtt_port = 1883;
-const char* mqtt_user = "homeassistant";
-const char* mqtt_password = "YOUR_MQTT_PASSWORD";
+// WiFi / MQTT Configuration
+// Attempt to include a local `secrets.h` (created from `secrets.example.h`).
+// This file is ignored by git so credentials remain private.
+#if defined(__has_include)
+#  if __has_include("secrets.h")
+#    include "secrets.h"
+#  endif
+#endif
+
+// Provide compile-time fallbacks if `secrets.h` is not present.
+#ifndef WIFI_SSID
+#define WIFI_SSID "YOUR_SSID"
+#endif
+#ifndef WIFI_PASSWORD
+#define WIFI_PASSWORD "YOUR_PASSWORD"
+#endif
+#ifndef MQTT_SERVER
+#define MQTT_SERVER "192.168.1.X"
+#endif
+#ifndef MQTT_PORT
+#define MQTT_PORT 1883
+#endif
+#ifndef MQTT_USER
+#define MQTT_USER "homeassistant"
+#endif
+#ifndef MQTT_PASSWORD
+#define MQTT_PASSWORD "YOUR_MQTT_PASSWORD"
+#endif
+
+const char* ssid = WIFI_SSID;
+const char* password = WIFI_PASSWORD;
+const char* mqtt_server = MQTT_SERVER;  // Home Assistant IP
+const int mqtt_port = MQTT_PORT;
+const char* mqtt_user = MQTT_USER;
+const char* mqtt_password = MQTT_PASSWORD;
 
 // MQTT Client
 WiFiClient espClient;
