@@ -5,8 +5,6 @@
 # - Maps common serial device paths as examples; remove or adjust as needed.
 # - Set `TZ` to your timezone (e.g., Europe/London or America/New_York).
 
-version: "3.8"
-
 services:
   homeassistant:
     container_name: homeassistant
