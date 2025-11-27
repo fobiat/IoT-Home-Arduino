@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Pre-commit hook to block accidental commits of secrets files
+set -e
+
+STAGED=$(git diff --cached --name-only --diff-filter=ACM)
+for file in $STAGED; do
+  case "$file" in
+    *secrets.h|*/secrets.h)
+      echo "ERROR: Attempting to commit a secrets file: $file"
+      echo "Please remove the file from the commit and keep credentials out of the repo."
+      echo "To keep a local secrets file, copy IoT_Home_Assistant/secrets.example.h -> IoT_Home_Assistant/secrets.h"
+      exit 1
+      ;;
+  esac
+done
+
+exit 0

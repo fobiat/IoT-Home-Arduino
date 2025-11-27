@@ -49,3 +49,26 @@ cp secrets.example.h secrets.h
 - `secrets.h` is ignored by the repository (`.gitignore`) so your private credentials will not be published.
 
 - If you prefer not to keep credentials in a file, you can also inject them at build time or use a hardware secure element.
+
+CI / GitHub Actions
+
+- The repository GitHub Actions workflow can build the sketch using repository secrets. To enable CI builds that use your credentials, add the following repository secrets under Settings → Secrets & variables → Actions:
+
+	- `WIFI_SSID`
+	- `WIFI_PASSWORD`
+	- `MQTT_SERVER`
+	- `MQTT_PORT`
+	- `MQTT_USER`
+	- `MQTT_PASSWORD`
+
+	The Action will create a `secrets.h` file at build time from those secrets so credentials are never stored in the repository.
+
+Local safety: pre-commit hook
+
+- The repository contains a sample pre-commit hook in `.githooks/pre-commit` that prevents committing `secrets.h`. To enable it locally run:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+This will make Git run the included hook locally, further protecting against accidental commits of private files.
