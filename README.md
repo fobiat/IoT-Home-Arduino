@@ -23,32 +23,14 @@ Build & status
 ![Arduino Build](https://github.com/fobiat/IoT-Home/actions/workflows/arduino-build.yml/badge.svg)
 ![Secret Scan](https://github.com/fobiat/IoT-Home/actions/workflows/secret-scan.yml/badge.svg)
 
+
 Snapshot
-
-- Kit reference: https://docs.52pi.com/md/kz-0054/whatinkit/
-
-- (Current image is a placeholder. To embed the kit photo in the README replace the placeholder with the actual image file `docs/images/geeekpi_kit.jpg`. See instructions below.)
 
 [GeeekPi kit docs](https://docs.52pi.com/md/kz-0054/whatinkit/)
 
-If you want the kit image embedded in the README, save the provided kit photo to `docs/images/geeekpi_kit.jpg` and update the README image line to:
-
-```html
-<img src="docs/images/geeekpi_kit.jpg" alt="GeeekPi Cloud Ready Kit" width="600">
-```
-
-Commands to add and push the image from your machine:
-
-```bash
-# from repository root
-mkdir -p docs/images
-# copy the kit image into the repo
-cp /path/to/your/attachment.jpg docs/images/geeekpi_kit.jpg
-git add docs/images/geeekpi_kit.jpg README.md
-git commit -m "docs: add GeeekPi kit image and embed in README"
-git push origin main
-```
-
+<p align="center">
+  <img src="docs/images/geeekpi_kit.jpg" alt="GeeekPi Cloud Ready Kit" width="600">
+</p>
 
 ## Project Overview
 
