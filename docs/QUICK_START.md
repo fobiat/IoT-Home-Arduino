@@ -33,11 +33,15 @@ Tools → Manage Libraries → Search and Install:
 ```
 
 ### Step 3: Configure WiFi & MQTT (1 min)
-Edit lines 10-16 in `IoT_Home_Assistant.ino`:
-```cpp
-const char* ssid = "YOUR_WIFI_NAME";
-const char* password = "YOUR_WIFI_PASSWORD";
-const char* mqtt_server = "192.168.1.100";  // Your Home Assistant IP
+Edit your credentials using the recommended secrets file. For secure, reproducible builds and container integration see the top-level README `Using secrets` section:
+
+`../README.md#using-secrets-recommended`
+
+Short version (local testing only): copy the example and edit values:
+
+```bash
+cp IoT_Home_Assistant/secrets.example.h IoT_Home_Assistant/secrets.h
+# then edit IoT_Home_Assistant/secrets.h and set `WIFI_SSID`, `WIFI_PASSWORD`, `MQTT_SERVER`, `MQTT_PORT`, `MQTT_USER`, `MQTT_PASSWORD`.
 ```
 
 ---
