@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Arduino R4 Mini - IoT Home Assistant Integration
 
 A comprehensive IoT system using Arduino Uno R4 WiFi to collect sensor data and integrate with Home Assistant via MQTT.
@@ -272,7 +271,7 @@ To store sensor history:
 
 - [ ] SD card data logging
 - [ ] Mobile app integration
-- [ ] Machine learning anomaly detection
+- [ ] Anomaly detection
 - [ ] Local forecasting
 - [ ] Advanced automation rules
 - [ ] Voice control (Alexa/Google Home)
@@ -290,6 +289,7 @@ To store sensor history:
 
 This project is provided as-is for educational and personal use.
 
+
 ## Contributing
 
 To improve this project:
@@ -303,6 +303,8 @@ To improve this project:
 **Last Updated**: November 2025
 **Arduino IDE Version**: 2.0+
 **Board**: Arduino Uno R4 WiFi
-=======
-# IoT-Home
->>>>>>> df94e30 (Initial commit)
+
+## Hardware / Tested Kit
+
+This project was developed and tested using the GeeekPi Arduino UNO R4 WiFi kit (example listing: https://www.ebay.co.uk/itm/226084953370). The code targets the Arduino Uno R4 WiFi board (FQBN: `arduino:renesas_uno:unor4wifi`). When the Arduino is not connected, repository-level checks and container-based services continue to run; hardware upload steps must be performed on a machine with the device attached.
+

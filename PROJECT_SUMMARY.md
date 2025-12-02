@@ -259,7 +259,7 @@ After completing this project, you'll understand:
 
 ### **Month 4+ (Ecosystem)**
 - [ ] Multiple Arduino nodes
-- [ ] Data analysis & ML
+- [ ] Data analysis & predictive features
 - [ ] Voice control integration
 - [ ] Mobile app dashboard
 

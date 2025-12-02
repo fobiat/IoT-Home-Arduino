@@ -246,10 +246,10 @@ A7 → Available
 - 🎯 RFID door control
 - 🎯 PIR motion detection
 
-### Long Term (Month 2+)
+## Long Term (Month 2+)
 - 🚀 Multiple sensor nodes
 - 🚀 Data analysis & logging
-- 🚀 AI/ML predictions
+- 🚀 Predictive analytics
 - 🚀 Voice control integration
 - 🚀 Mobile dashboard
 

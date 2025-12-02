@@ -302,7 +302,7 @@ Your project is working when:
 - Purchase recommended upgrades
 - Expand to multiple rooms
 - Build mesh network
-- Implement ML predictions
++ Implement predictive features
 
 ---
 
