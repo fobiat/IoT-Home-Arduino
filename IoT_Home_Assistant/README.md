@@ -50,6 +50,9 @@ cp secrets.example.h secrets.h
 
 - If you prefer not to keep credentials in a file, you can also inject them at build time or use a hardware secure element.
 
+See the top-level README `Using secrets (recommended)` section for full guidance and CI secret names:
+`../README.md#using-secrets-recommended`
+
 CI / GitHub Actions
 
 - The repository GitHub Actions workflow can build the sketch using repository secrets. To enable CI builds that use your credentials, add the following repository secrets under Settings → Secrets & variables → Actions:
