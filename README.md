@@ -317,3 +317,6 @@ Notes
 - When the Arduino is not connected, repository-level checks (CI, Docker services) still run; hardware upload steps must be performed on a machine with the device attached.
 - The example kit listing above is for convenience — kit contents and sellers may change; use the wiring guide here as the authoritative reference for pin wiring and sensor connections.
 
+See also:
+- `mqtt/README.md` — instructions for generating the Mosquitto `passwordfile` from your local `secrets.h` and important security notes (do not commit the generated `passwordfile`).
+
