@@ -11,6 +11,22 @@ This project demonstrates a multi-sensor IoT setup that:
 - Responds to button input
 - Displays real-time data on LCD
 
+## Hardware / Tested Kit
+
+This project was developed and tested with the GeeekPi Cloud-Ready IoT kit based around the Arduino UNO R4 WiFi board (example listing: https://www.ebay.co.uk/itm/226084953370). The GeeekPi kit typically includes the UNO R4 WiFi board plus common sensors and modules (DHT22, BMP280, MPU6050, HC-SR04, soil sensor, sound sensor, rain sensor, LCD, relays and small accessories). This repository provides code, wiring guides and Home Assistant configuration intended to work with that kit.
+
+Key points about the GeeekPi kit
+- Includes a pre-selected sensor set and wiring examples so you can assemble a working IoT node quickly.
+- The Arduino Uno R4 WiFi uses FQBN: `arduino:renesas_uno:unor4wifi` in `arduino-cli` / Arduino IDE.
+- This repository is a companion resource for that kit: follow `docs/QUICK_START.md` and `docs/WIRING_GUIDE.md` to get the kit running.
+
+Notes
+- When the Arduino is not connected, repository-level checks (CI, Docker services) still run; hardware upload steps must be performed on a machine with the device attached.
+- The example kit listing above is for convenience — kit contents and sellers may change; use the wiring guide here as the authoritative reference for pin wiring and sensor connections.
+
+See also:
+- `mqtt/README.md` — instructions for generating the Mosquitto `passwordfile` from your local `secrets.h` and important security notes (do not commit the generated `passwordfile`).
+
 ## Hardware Components Used
 
 ### Sensors (8)
@@ -70,6 +86,26 @@ const char* mqtt_server = "192.168.1.X";  // Home Assistant IP
 const char* mqtt_user = "homeassistant";
 const char* mqtt_password = "YOUR_MQTT_PASSWORD";
 ```
+
+### Using secrets (recommended)
+
+- There is a sample file at `IoT_Home_Assistant/secrets.example.h`. To keep credentials out of version control, copy it to `IoT_Home_Assistant/secrets.h` and edit the values:
+
+```bash
+cp IoT_Home_Assistant/secrets.example.h IoT_Home_Assistant/secrets.h
+# then open IoT_Home_Assistant/secrets.h and set `WIFI_SSID`, `WIFI_PASSWORD`, `MQTT_SERVER`, `MQTT_USER`, `MQTT_PASSWORD`.
+```
+
+- `IoT_Home_Assistant/secrets.h` is ignored by `.gitignore` so your private credentials won't be published. A sample pre-commit hook is included at `.githooks/pre-commit` to help prevent accidental commits of `secrets.h` — enable it locally with:
+
+```bash
+./scripts/install-hooks.sh
+```
+
+- For CI builds (GitHub Actions) provide repository secrets with these names: `WIFI_SSID`, `WIFI_PASSWORD`, `MQTT_SERVER`, `MQTT_PORT`, `MQTT_USER`, `MQTT_PASSWORD`. The build workflow will create `IoT_Home_Assistant/secrets.h` at build time from those secrets so credentials are not stored in the repository.
+
+- The helper script `scripts/generate_mosquitto_password.sh` reads `MQTT_USER` and `MQTT_PASSWORD` from `IoT_Home_Assistant/secrets.h` to create a hashed Mosquitto `passwordfile` for the container. Do not commit the generated `mqtt/config/passwordfile`.
+
 
 ### 4. Wire Components
 Follow detailed wiring guide in `docs/WIRING_GUIDE.md`
@@ -303,20 +339,5 @@ To improve this project:
 **Last Updated**: November 2025
 **Arduino IDE Version**: 2.0+
 **Board**: Arduino Uno R4 WiFi
-
 ## Hardware / Tested Kit
-
-This project was developed and tested with the GeeekPi Cloud-Ready IoT kit based around the Arduino UNO R4 WiFi board (example listing: https://www.ebay.co.uk/itm/226084953370). The GeeekPi kit typically includes the UNO R4 WiFi board plus common sensors and modules (DHT22, BMP280, MPU6050, HC-SR04, soil sensor, sound sensor, rain sensor, LCD, relays and small accessories). This repository provides code, wiring guides and Home Assistant configuration intended to work with that kit.
-
-Key points about the GeeekPi kit
-- Includes a pre-selected sensor set and wiring examples so you can assemble a working IoT node quickly.
-- The Arduino Uno R4 WiFi uses FQBN: `arduino:renesas_uno:unor4wifi` in `arduino-cli` / Arduino IDE.
-- This repository is a companion resource for that kit: follow `docs/QUICK_START.md` and `docs/WIRING_GUIDE.md` to get the kit running.
-
-Notes
-- When the Arduino is not connected, repository-level checks (CI, Docker services) still run; hardware upload steps must be performed on a machine with the device attached.
-- The example kit listing above is for convenience — kit contents and sellers may change; use the wiring guide here as the authoritative reference for pin wiring and sensor connections.
-
-See also:
-- `mqtt/README.md` — instructions for generating the Mosquitto `passwordfile` from your local `secrets.h` and important security notes (do not commit the generated `passwordfile`).
 
