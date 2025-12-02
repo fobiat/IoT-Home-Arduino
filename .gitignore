@@ -41,6 +41,9 @@ secrets.h
 credentials.h
 .env
 password.txt
+mqtt/config/passwordfile
+mqtt/data/
+homeassistant/
 
 # Temporary
 *.tmp
