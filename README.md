@@ -5,18 +5,18 @@ A comprehensive IoT system using Arduino Uno R4 WiFi to collect sensor data and 
 ## At a glance
 
 - This repo provides a complete, hobbyist-friendly IoT node built for the Arduino Uno R4 WiFi: sensor firmware, wiring diagrams, Home Assistant configuration, and local test infrastructure (MQTT broker + Docker Compose).
-- Follow the short beginner guide (`docs/ELI5_GETTING_STARTED.md`) to go from unboxing to first reading in minutes.
-- Key components: Arduino sketch (`IoT_Home_Assistant`), docs and wiring (`docs/`), MQTT broker configuration (`mqtt/`), and optional Docker Compose for Home Assistant and Mosquitto.
+- Follow the short beginner guide ([ELI5](/docs/ELI5_GETTING_STARTED.md)) to go from unboxing to first reading in minutes.
+- Key components: Arduino sketch ([IoT_Home_Assistant](IoT_Home_Assistant/README.md)), docs and wiring ([docs/](docs/PROJECT_INDEX.md)), MQTT broker configuration ([mqtt/](mqtt/README.md)), and optional Docker Compose for Home Assistant and Mosquitto.
 
 Quick links
-- Getting started (ELI5): `docs/ELI5_GETTING_STARTED.md`
-- Quick Start: `docs/QUICK_START.md`
-- Wiring & Breadboard layouts: `docs/WIRING_GUIDE.md`, `docs/BREADBOARD_LAYOUT.md`
-- MQTT topics & broker: `docs/MQTT_TOPICS.md`, `mqtt/README.md`
-- Sensor calibration: `docs/SENSOR_CALIBRATION.md`
-- Recommended upgrades: `docs/RECOMMENDED_UPGRADES.md`
-- Project index & documentation map: `docs/PROJECT_INDEX.md`
-- Arduino sketch and build instructions: `IoT_Home_Assistant/README.md`
+- Getting started (ELI5): [ELI5 — Getting Started](docs/ELI5_GETTING_STARTED.md)
+- Quick Start: [Quick Start](docs/QUICK_START.md)
+- Wiring & Breadboard layouts: [Wiring Guide](docs/WIRING_GUIDE.md), [Breadboard Layout](docs/BREADBOARD_LAYOUT.md)
+- MQTT topics & broker: [MQTT Topics](docs/MQTT_TOPICS.md), [mqtt/README.md](mqtt/README.md)
+- Sensor calibration: [Sensor Calibration](docs/SENSOR_CALIBRATION.md)
+- Recommended upgrades: [Recommended Upgrades](docs/RECOMMENDED_UPGRADES.md)
+- Project index & documentation map: [Project Index](docs/PROJECT_INDEX.md)
+- Arduino sketch and build instructions: [IoT_Home_Assistant README](IoT_Home_Assistant/README.md)
 
 Build & status
 
@@ -44,14 +44,14 @@ This project was developed and tested with the GeeekPi Cloud-Ready IoT kit based
 Key points about the GeeekPi kit
 - Includes a pre-selected sensor set and wiring examples so you can assemble a working IoT node quickly.
 - The Arduino Uno R4 WiFi uses FQBN: `arduino:renesas_uno:unor4wifi` in `arduino-cli` / Arduino IDE.
-- This repository is a companion resource for that kit: follow `docs/QUICK_START.md` and `docs/WIRING_GUIDE.md` to get the kit running.
+-- This repository is a companion resource for that kit: follow [Quick Start](docs/QUICK_START.md) and [Wiring Guide](docs/WIRING_GUIDE.md) to get the kit running.
 
 Notes
 - When the Arduino is not connected, repository-level checks (CI, Docker services) still run; hardware upload steps must be performed on a machine with the device attached.
 - The example kit listing above is for convenience — kit contents and sellers may change; use the wiring guide here as the authoritative reference for pin wiring and sensor connections.
 
 See also:
-- `mqtt/README.md` — instructions for generating the Mosquitto `passwordfile` from your local `secrets.h` and important security notes (do not commit the generated `passwordfile`).
+- [mqtt/README.md](mqtt/README.md) — instructions for generating the Mosquitto `passwordfile` from your local `secrets.h` and important security notes (do not commit the generated `passwordfile`).
 
 ## Hardware Components Used
 
@@ -134,7 +134,7 @@ cp IoT_Home_Assistant/secrets.example.h IoT_Home_Assistant/secrets.h
 
 
 ### 4. Wire Components
-Follow detailed wiring guide in `docs/WIRING_GUIDE.md`
+Follow detailed wiring guide in [WIRING_GUIDE.md](docs/WIRING_GUIDE.md)
 
 ### 5. Upload to Arduino
 - Connect Arduino R4 via USB-C
