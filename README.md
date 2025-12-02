@@ -306,5 +306,14 @@ To improve this project:
 
 ## Hardware / Tested Kit
 
-This project was developed and tested using the GeeekPi Arduino UNO R4 WiFi kit (example listing: https://www.ebay.co.uk/itm/226084953370). The code targets the Arduino Uno R4 WiFi board (FQBN: `arduino:renesas_uno:unor4wifi`). When the Arduino is not connected, repository-level checks and container-based services continue to run; hardware upload steps must be performed on a machine with the device attached.
+This project was developed and tested with the GeeekPi Cloud-Ready IoT kit based around the Arduino UNO R4 WiFi board (example listing: https://www.ebay.co.uk/itm/226084953370). The GeeekPi kit typically includes the UNO R4 WiFi board plus common sensors and modules (DHT22, BMP280, MPU6050, HC-SR04, soil sensor, sound sensor, rain sensor, LCD, relays and small accessories). This repository provides code, wiring guides and Home Assistant configuration intended to work with that kit.
+
+Key points about the GeeekPi kit
+- Includes a pre-selected sensor set and wiring examples so you can assemble a working IoT node quickly.
+- The Arduino Uno R4 WiFi uses FQBN: `arduino:renesas_uno:unor4wifi` in `arduino-cli` / Arduino IDE.
+- This repository is a companion resource for that kit: follow `docs/QUICK_START.md` and `docs/WIRING_GUIDE.md` to get the kit running.
+
+Notes
+- When the Arduino is not connected, repository-level checks (CI, Docker services) still run; hardware upload steps must be performed on a machine with the device attached.
+- The example kit listing above is for convenience — kit contents and sellers may change; use the wiring guide here as the authoritative reference for pin wiring and sensor connections.
 
