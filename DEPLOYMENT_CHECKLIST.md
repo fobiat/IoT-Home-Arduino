@@ -208,7 +208,7 @@ Temperature reads wrong?
 ├─ Off by ~2°C? → Normal DHT22 error
 ├─ Way off (50°C)? → Check I2C conflict
 ├─ Erratic readings? → Check 10k resistor on DHT
-└─ Run calibration: docs/SENSOR_CALIBRATION.md
+└─ Run calibration: SENSOR_CALIBRATION.md
 ```
 
 ---

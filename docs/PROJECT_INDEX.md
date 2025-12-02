@@ -9,20 +9,20 @@ Welcome to your Arduino R4 Mini IoT Home Assistant project! This is a complete I
 ## 🚀 Getting Started (Start Here!)
 
 ### First Time Setup
-1. **[QUICK_START.md](docs/QUICK_START.md)** ⭐ START HERE
+1. **[QUICK_START.md](QUICK_START.md)** ⭐ START HERE
    - 5-minute setup overview
    - WiFi & MQTT configuration
    - First test in 10 minutes
    - Troubleshooting quick fixes
 
 ### Hardware Setup
-2. **[WIRING_GUIDE.md](docs/WIRING_GUIDE.md)**
+2. **[WIRING_GUIDE.md](WIRING_GUIDE.md)**
    - Detailed pin configuration
    - Component descriptions
    - Breadboard connection guide
    - Testing checklist
 
-3. **[BREADBOARD_LAYOUT.md](docs/BREADBOARD_LAYOUT.md)**
+3. **[BREADBOARD_LAYOUT.md](BREADBOARD_LAYOUT.md)**
    - Visual ASCII diagrams
    - Power distribution
    - Row-by-row component placement
@@ -47,7 +47,7 @@ Welcome to your Arduino R4 Mini IoT Home Assistant project! This is a complete I
 ## 🔧 Technical Guides
 
 ### MQTT & Home Assistant
-- **[MQTT_TOPICS.md](docs/MQTT_TOPICS.md)**
+- **[MQTT_TOPICS.md](MQTT_TOPICS.md)**
   - All MQTT topics (subscribe/publish)
   - Payload examples
   - Testing procedures
@@ -60,7 +60,7 @@ Welcome to your Arduino R4 Mini IoT Home Assistant project! This is a complete I
   - Automation examples
 
 ### Sensor Calibration
-- **[SENSOR_CALIBRATION.md](docs/SENSOR_CALIBRATION.md)**
+- **[SENSOR_CALIBRATION.md](SENSOR_CALIBRATION.md)**
   - Per-sensor calibration procedures
   - Expected values
   - Troubleshooting
@@ -71,7 +71,7 @@ Welcome to your Arduino R4 Mini IoT Home Assistant project! This is a complete I
 ## 🛒 Future Improvements
 
 ### Recommendations
-- **[RECOMMENDED_UPGRADES.md](docs/RECOMMENDED_UPGRADES.md)**
+- **[RECOMMENDED_UPGRADES.md](RECOMMENDED_UPGRADES.md)**
   - High priority upgrades (~$50-70)
   - Medium priority additions (~$50-70)
   - Advanced components (~$50+)
@@ -110,25 +110,25 @@ IoT Home/
 ## 🎯 Quick Navigation by Task
 
 ### "I just received the components"
-→ Start with [QUICK_START.md](docs/QUICK_START.md)
+→ Start with [QUICK_START.md](QUICK_START.md)
 
 ### "I need to wire everything"
-→ Go to [WIRING_GUIDE.md](docs/WIRING_GUIDE.md) + [BREADBOARD_LAYOUT.md](docs/BREADBOARD_LAYOUT.md)
+→ Go to [WIRING_GUIDE.md](WIRING_GUIDE.md) + [BREADBOARD_LAYOUT.md](BREADBOARD_LAYOUT.md)
 
 ### "Arduino won't upload"
-→ Check [QUICK_START.md](docs/QUICK_START.md) Troubleshooting section
+→ Check [QUICK_START.md](QUICK_START.md) Troubleshooting section
 
 ### "Sensor readings are wrong"
-→ See [SENSOR_CALIBRATION.md](docs/SENSOR_CALIBRATION.md)
+→ See [SENSOR_CALIBRATION.md](SENSOR_CALIBRATION.md)
 
 ### "I want to add Home Assistant automations"
 → Read [config/home_assistant.yaml](config/home_assistant.yaml)
 
 ### "I want to understand MQTT topics"
-→ Check [MQTT_TOPICS.md](docs/MQTT_TOPICS.md)
+→ Check [MQTT_TOPICS.md](MQTT_TOPICS.md)
 
 ### "What should I buy next?"
-→ See [RECOMMENDED_UPGRADES.md](docs/RECOMMENDED_UPGRADES.md)
+→ See [RECOMMENDED_UPGRADES.md](RECOMMENDED_UPGRADES.md)
 
 ### "What components am I actually using?"
 → View [COMPONENT_INVENTORY.md](COMPONENT_INVENTORY.md)
@@ -330,7 +330,7 @@ Your project is working when:
 
 ## 🎉 You're All Set!
 
-Everything you need is in these documents. Start with **[QUICK_START.md](docs/QUICK_START.md)** and follow the steps.
+Everything you need is in these documents. Start with **[QUICK_START.md](QUICK_START.md)** and follow the steps.
 
 **Your IoT Home awaits! 🏠📊**
 

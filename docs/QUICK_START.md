@@ -144,7 +144,7 @@ Copy from `config/home_assistant.yaml` or use auto-discovery:
 
 ### Week 1: Get comfortable
 - Monitor sensor readings in Home Assistant
-- Learn MQTT topics (`docs/MQTT_TOPICS.md`)
+- Learn MQTT topics (`MQTT_TOPICS.md`)
 - Create simple automations
 
 ### Week 2: Add more sensors
@@ -179,7 +179,7 @@ Copy from `config/home_assistant.yaml` or use auto-discovery:
 | Sound Level | 0-300 (quiet room) |
 | Rain | "dry" (unless wet) |
 
-If values are way off, see calibration guide: `docs/SENSOR_CALIBRATION.md`
+If values are way off, see calibration guide: `SENSOR_CALIBRATION.md`
 
 ---
 
