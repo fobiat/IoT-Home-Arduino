@@ -18,6 +18,15 @@ Quick links
 - Project index & documentation map: `docs/PROJECT_INDEX.md`
 - Arduino sketch and build instructions: `IoT_Home_Assistant/README.md`
 
+Build & status
+
+![Arduino Build](https://github.com/fobiat/IoT-Home/actions/workflows/arduino-build.yml/badge.svg)
+![Secret Scan](https://github.com/fobiat/IoT-Home/actions/workflows/secret-scan.yml/badge.svg)
+
+Snapshot
+
+![kit placeholder](docs/images/placeholder.svg)
+
 
 ## Project Overview
 
