@@ -33,10 +33,10 @@ Welcome to your Arduino R4 Mini IoT Home Assistant project! This is a complete I
 ## 📚 Main Documentation
 
 ### Project Overview
-- **[README.md](README.md)** - Full project description, features, and specs
+- **[README.md](../README.md)** - Full project description, features, and specs
 
 ### Component Management
-- **[COMPONENT_INVENTORY.md](COMPONENT_INVENTORY.md)**
+- **[COMPONENT_INVENTORY.md](../COMPONENT_INVENTORY.md)**
   - What components you have
   - Which ones are used (65%)
   - What can be added
@@ -53,7 +53,7 @@ Welcome to your Arduino R4 Mini IoT Home Assistant project! This is a complete I
   - Testing procedures
   - Template sensors
 
-- **[config/home_assistant.yaml](config/home_assistant.yaml)**
+- **[config/home_assistant.yaml](../config/home_assistant.yaml)**
   - MQTT configuration
   - Sensor definitions
   - Switch definitions
@@ -122,7 +122,7 @@ IoT Home/
 → See [SENSOR_CALIBRATION.md](SENSOR_CALIBRATION.md)
 
 ### "I want to add Home Assistant automations"
-→ Read [config/home_assistant.yaml](config/home_assistant.yaml)
+→ Read [config/home_assistant.yaml](../config/home_assistant.yaml)
 
 ### "I want to understand MQTT topics"
 → Check [MQTT_TOPICS.md](MQTT_TOPICS.md)

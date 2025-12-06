@@ -5,7 +5,7 @@ A comprehensive IoT system using Arduino Uno R4 WiFi to collect sensor data and 
 ## At a glance
 
 - This repo provides a complete, hobbyist-friendly IoT node built for the Arduino Uno R4 WiFi: sensor firmware, wiring diagrams, Home Assistant configuration, and local test infrastructure (MQTT broker + Docker Compose).
-- Follow the short beginner guide ([ELI5](/docs/ELI5_GETTING_STARTED.md)) to go from unboxing to first reading in minutes.
+-- Follow the short beginner guide ([ELI5](docs/ELI5_GETTING_STARTED.md)) to go from unboxing to first reading in minutes.
 - Key components: Arduino sketch ([IoT_Home_Assistant](IoT_Home_Assistant/README.md)), docs and wiring ([docs/](docs/PROJECT_INDEX.md)), MQTT broker configuration ([mqtt/](mqtt/README.md)), and optional Docker Compose for Home Assistant and Mosquitto.
 
 Quick links
@@ -348,7 +348,7 @@ To store sensor history:
 
 - [Arduino R4 Documentation](https://docs.arduino.cc/hardware/uno-r4-wifi/)
 - [Home Assistant MQTT Integration](https://www.home-assistant.io/integrations/mqtt/)
-- [PubSubClient Library](https://github.com/knolleary/pubsub_client)
+- [PubSubClient Library](https://github.com/knolleary/pubsubclient)
 - [Adafruit Sensor Libraries](https://github.com/adafruit)
 
 ## License
