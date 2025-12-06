@@ -3,7 +3,9 @@ repos:
     rev: v4.4.0
     hooks:
       - id: trailing-whitespace
+        exclude: ^mqtt/config/mosquitto.conf$
       - id: end-of-file-fixer
+        exclude: ^mqtt/config/mosquitto.conf$
       - id: check-yaml
 
   - repo: https://github.com/Yelp/detect-secrets

@@ -89,7 +89,7 @@ const unsigned long PUBLISH_INTERVAL = 10000; // 10 seconds
 void app_setup() {
   Serial.begin(115200);
   delay(100);
-  
+
   // Initialize pins
   pinMode(BUZZER_PIN, OUTPUT);
   pinMode(LED_BLUE, OUTPUT);
@@ -104,24 +104,24 @@ void app_setup() {
   pinMode(BUTTON2, INPUT_PULLUP);
   pinMode(BUTTON3, INPUT_PULLUP);
   pinMode(BUTTON4, INPUT_PULLUP);
-  
+
   // Initialize LCD
   lcd.init();
   lcd.backlight();
   lcd.print("IoT Home Init...");
-  
+
   Serial.println("\nStarting Arduino IoT Home Assistant");
-  
+
   // Initialize sensors
   initializeSensors();
-  
+
   // Connect to WiFi
   connectToWiFi();
-  
+
   // Setup MQTT
   client.setServer(mqtt_server, mqtt_port);
   client.setCallback(mqttCallback);
-  
+
   lcd.clear();
   lcd.print("Setup Complete!");
   delay(2000);
@@ -133,7 +133,7 @@ void app_loop() {
     reconnectMQTT();
   }
   client.loop();
-  
+
   // Read sensors periodically
   if (millis() - lastPublish > PUBLISH_INTERVAL) {
     readAllSensors();
@@ -141,50 +141,50 @@ void app_loop() {
     updateDisplay();
     lastPublish = millis();
   }
-  
+
   // Check buttons
   checkButtons();
-  
+
   delay(100);
 }
 
 void initializeSensors() {
   // DHT22
   dht.begin();
-  
+
   // BMP280
   if (!bmp280.begin(0x76)) {
     Serial.println("BMP280 not found!");
   }
-  
+
   // MPU6050
   Wire.begin();
   mpu6050.initialize();
   if (!mpu6050.testConnection()) {
     Serial.println("MPU6050 not found!");
   }
-  
+
   Serial.println("Sensors initialized");
 }
 
 void connectToWiFi() {
   Serial.print("Connecting to WiFi: ");
   Serial.println(ssid);
-  
+
   WiFi.begin(ssid, password);
   int attempts = 0;
-  
+
   while (WiFi.status() != WL_CONNECTED && attempts < 20) {
     delay(500);
     Serial.print(".");
     attempts++;
   }
-  
+
   if (WiFi.status() == WL_CONNECTED) {
     Serial.println("\nWiFi connected!");
     Serial.print("IP address: ");
     Serial.println(WiFi.localIP());
-    
+
     // Flash blue LED to indicate connection
     digitalWrite(LED_BLUE, HIGH);
     delay(500);
@@ -198,11 +198,11 @@ void connectToWiFi() {
 void reconnectMQTT() {
   while (!client.connected()) {
     Serial.print("Attempting MQTT connection...");
-    
+
     if (client.connect("Arduino-R4", mqtt_user, mqtt_password)) {
       Serial.println("connected");
       digitalWrite(LED_GREEN, HIGH);
-      
+
       // Subscribe to control topics
       client.subscribe("home/arduino/control/relay1");
       client.subscribe("home/arduino/control/relay2");
@@ -222,12 +222,12 @@ void mqttCallback(char* topic, byte* payload, unsigned int length) {
   for (unsigned int i = 0; i < length; i++) {
     message += (char)payload[i];
   }
-  
+
   Serial.print("Message arrived [");
   Serial.print(topic);
   Serial.print("]: ");
   Serial.println(message);
-  
+
   if (String(topic) == "home/arduino/control/relay1") {
     digitalWrite(RELAY_PIN1, message == "ON" ? HIGH : LOW);
   } else if (String(topic) == "home/arduino/control/relay2") {
@@ -245,24 +245,24 @@ void readAllSensors() {
   // DHT22 - Temperature & Humidity
   sensorData.humidity = dht.readHumidity();
   sensorData.temperature = dht.readTemperature();
-  
+
   // BMP280 - Pressure & Altitude
   sensorData.pressure = bmp280.readPressure() / 100.0; // Convert to hPa
   sensorData.altitude = bmp280.readAltitude(1013.25);
-  
+
   // MPU6050 - Gyroscope & Accelerometer
   mpu6050.getAcceleration(&sensorData.accel_x, &sensorData.accel_y, &sensorData.accel_z);
   mpu6050.getRotation(&sensorData.gyro_x, &sensorData.gyro_y, &sensorData.gyro_z);
-  
+
   // Ultrasonic Distance
   sensorData.ultrasonic_distance = getUltrasonicDistance();
-  
+
   // Soil Moisture
   sensorData.soil_moisture = analogRead(SOIL_MOISTURE_PIN);
-  
+
   // Rain Sensor
   sensorData.rain_detected = digitalRead(RAIN_SENSOR_PIN);
-  
+
   // Sound Level
   sensorData.sound_level = analogRead(SOUND_SENSOR_PIN);
 }
@@ -273,61 +273,61 @@ int getUltrasonicDistance() {
   digitalWrite(ULTRASONIC_TRIG, HIGH);
   delayMicroseconds(10);
   digitalWrite(ULTRASONIC_TRIG, LOW);
-  
+
   long duration = pulseIn(ULTRASONIC_ECHO, HIGH);
   int distance = duration * 0.034 / 2; // Convert to cm
-  
+
   return distance;
 }
 
 void publishSensorData() {
   char buffer[50];
-  
+
   // Temperature
   dtostrf(sensorData.temperature, 5, 2, buffer);
   client.publish("home/arduino/sensor/temperature", buffer);
-  
+
   // Humidity
   dtostrf(sensorData.humidity, 5, 2, buffer);
   client.publish("home/arduino/sensor/humidity", buffer);
-  
+
   // Pressure
   dtostrf(sensorData.pressure, 7, 2, buffer);
   client.publish("home/arduino/sensor/pressure", buffer);
-  
+
   // Altitude
   dtostrf(sensorData.altitude, 7, 2, buffer);
   client.publish("home/arduino/sensor/altitude", buffer);
-  
+
   // Distance
   itoa(sensorData.ultrasonic_distance, buffer, 10);
   client.publish("home/arduino/sensor/distance", buffer);
-  
+
   // Soil Moisture
   itoa(sensorData.soil_moisture, buffer, 10);
   client.publish("home/arduino/sensor/soil_moisture", buffer);
-  
+
   // Sound Level
   itoa(sensorData.sound_level, buffer, 10);
   client.publish("home/arduino/sensor/sound_level", buffer);
-  
+
   // Rain Detection
   client.publish("home/arduino/sensor/rain", sensorData.rain_detected ? "wet" : "dry");
-  
+
   Serial.println("Sensor data published to MQTT");
 }
 
 void updateDisplay() {
   lcd.clear();
   lcd.setCursor(0, 0);
-  
+
   // Display temperature and humidity
   lcd.print("T:");
   lcd.print(sensorData.temperature, 1);
   lcd.print("C H:");
   lcd.print(sensorData.humidity, 0);
   lcd.print("%");
-  
+
   lcd.setCursor(0, 1);
   lcd.print("D:");
   lcd.print(sensorData.ultrasonic_distance);
@@ -345,7 +345,7 @@ void checkButtons() {
       delay(200); // Debounce
     }
   }
-  
+
   if (digitalRead(BUTTON2) == LOW) {
     delay(20);
     if (digitalRead(BUTTON2) == LOW) {

@@ -10,239 +10,35 @@ mqtt:
   port: 1883
   username: homeassistant
   password: YOUR_MQTT_PASSWORD
-  
+
 automation: !include automations.yaml
 script: !include scripts.yaml
-```
-
----
-
-## Sensor Configuration
-
-Add these to `configuration.yaml` or create `sensors.yaml` and include it:
-
-```yaml
-mqtt:
-  # ... mqtt config above ...
-
-sensor:
-  # Temperature
   - platform: mqtt
-    name: "Arduino Temperature"
-    state_topic: "home/arduino/sensor/temperature"
-    unit_of_measurement: "°C"
-    icon: mdi:thermometer
-    
-  # Humidity
+# Home Assistant sample configuration (documentation)
+
+This file contains documentation and example snippets for integrating the
+Arduino-based sensors with Home Assistant. It is intentionally written as
+comments so it is safe to store in the repository and won't be parsed as
+runtime configuration by tools that validate YAML.
+
+# Example MQTT configuration (place in your real `configuration.yaml`):
+#
+# mqtt:
+#   broker: 192.168.1.2
+#   port: 1883
+#   username: homeassistant
+#   password: YOUR_MQTT_PASSWORD
+#
+# Example sensor (MQTT) snippet:
+#
+# sensor:
+#   - platform: mqtt
+#     name: "Arduino Temperature"
+#     state_topic: "home/arduino/sensor/temperature"
+#     unit_of_measurement: "°C"
+
+# Automation examples and dashboard snippets are intentionally omitted
+# from this file to avoid accidental validation errors. See the docs
+# in `docs/QUICK_START.md` for full examples and copy the small
+# snippets into your Home Assistant `configuration.yaml` as needed.
   - platform: mqtt
-    name: "Arduino Humidity"
-    state_topic: "home/arduino/sensor/humidity"
-    unit_of_measurement: "%"
-    icon: mdi:water-percent
-    
-  # Pressure
-  - platform: mqtt
-    name: "Arduino Pressure"
-    state_topic: "home/arduino/sensor/pressure"
-    unit_of_measurement: "hPa"
-    icon: mdi:gauge
-    
-  # Altitude
-  - platform: mqtt
-    name: "Arduino Altitude"
-    state_topic: "home/arduino/sensor/altitude"
-    unit_of_measurement: "m"
-    icon: mdi:altimeter
-    
-  # Distance
-  - platform: mqtt
-    name: "Arduino Distance"
-    state_topic: "home/arduino/sensor/distance"
-    unit_of_measurement: "cm"
-    icon: mdi:ruler
-    
-  # Soil Moisture
-  - platform: mqtt
-    name: "Arduino Soil Moisture"
-    state_topic: "home/arduino/sensor/soil_moisture"
-    unit_of_measurement: ""
-    icon: mdi:water-check
-    
-  # Sound Level
-  - platform: mqtt
-    name: "Arduino Sound Level"
-    state_topic: "home/arduino/sensor/sound_level"
-    unit_of_measurement: ""
-    icon: mdi:volume-high
-    
-  # Rain Detection
-  - platform: mqtt
-    name: "Arduino Rain Status"
-    state_topic: "home/arduino/sensor/rain"
-    icon: mdi:water-drop
-```
-
----
-
-## Switch Configuration
-
-For relay control:
-
-```yaml
-switch:
-  - platform: mqtt
-    name: "Arduino Relay 1"
-    command_topic: "home/arduino/control/relay1"
-    state_topic: "home/arduino/relay1/state"
-    payload_on: "ON"
-    payload_off: "OFF"
-    icon: mdi:power-switch-open
-    
-  - platform: mqtt
-    name: "Arduino Relay 2"
-    command_topic: "home/arduino/control/relay2"
-    state_topic: "home/arduino/relay2/state"
-    payload_on: "ON"
-    payload_off: "OFF"
-    icon: mdi:power-switch-open
-    
-  - platform: mqtt
-    name: "Arduino Buzzer"
-    command_topic: "home/arduino/control/buzzer"
-    state_topic: "home/arduino/buzzer/state"
-    payload_on: "ON"
-    payload_off: "OFF"
-    icon: mdi:speaker-wireless
-```
-
----
-
-## Automation Examples
-
-```yaml
-automation:
-  # Alert when temperature too high
-  - alias: "High Temperature Alert"
-    trigger:
-      platform: numeric_state
-      entity_id: sensor.arduino_temperature
-      above: 28
-    action:
-      service: notify.mobile_app
-      data:
-        message: "Temperature is {{ states('sensor.arduino_temperature') }}°C"
-        title: "High Temperature Warning"
-
-  # Alert when rain detected
-  - alias: "Rain Detected"
-    trigger:
-      platform: mqtt
-      topic: "home/arduino/sensor/rain"
-      payload: "wet"
-    action:
-      - service: switch.turn_on
-        entity_id: switch.arduino_relay_1  # Trigger rain alert
-      - delay: 00:00:05
-      - service: switch.turn_off
-        entity_id: switch.arduino_relay_1
-
-  # Low soil moisture alert
-  - alias: "Low Soil Moisture"
-    trigger:
-      platform: numeric_state
-      entity_id: sensor.arduino_soil_moisture
-      below: 200
-    action:
-      service: persistent_notification.create
-      data:
-        title: "Water Plant"
-        message: "Soil moisture is low: {{ states('sensor.arduino_soil_moisture') }}"
-        notification_id: "water_plant"
-
-  # High noise alert
-  - alias: "High Noise Level"
-    trigger:
-      platform: numeric_state
-      entity_id: sensor.arduino_sound_level
-      above: 600
-    action:
-      service: switch.turn_on
-      entity_id: switch.arduino_buzzer
-```
-
----
-
-## Dashboard Card Example
-
-Add to your Home Assistant dashboard:
-
-```yaml
-type: entities
-title: Arduino IoT Sensors
-entities:
-  - entity: sensor.arduino_temperature
-  - entity: sensor.arduino_humidity
-  - entity: sensor.arduino_pressure
-  - entity: sensor.arduino_altitude
-  - entity: sensor.arduino_distance
-  - entity: sensor.arduino_soil_moisture
-  - entity: sensor.arduino_sound_level
-  - entity: sensor.arduino_rain_status
-  - entity: switch.arduino_relay_1
-  - entity: switch.arduino_relay_2
-  - entity: switch.arduino_buzzer
-```
-
----
-
-## Required Arduino Libraries
-
-Install via Arduino IDE Library Manager:
-- WiFiS3
-- PubSubClient (MQTT)
-- Adafruit BMP280
-- DHT sensor library
-- MPU6050 library
-- LiquidCrystal I2C
-
-```cpp
-// In Arduino IDE: Sketch → Include Library → Manage Libraries
-// Search and install:
-// - PubSubClient by Nick O'Leary
-// - Adafruit BMP280 by Adafruit
-// - DHT sensor library by Adafruit
-// - MPU6050 by Electronic Cats
-// - LiquidCrystal I2C by Frank de Brabander
-```
-
----
-
-## Initial Setup Steps
-
-1. **Configure WiFi credentials** in the Arduino sketch:
-   ```cpp
-   const char* ssid = "YOUR_SSID";
-   const char* password = "YOUR_PASSWORD";
-   const char* mqtt_server = "192.168.1.X";  // Your Home Assistant IP
-   ```
-
-2. **Setup MQTT in Home Assistant**:
-   - Install MQTT broker add-on or use external broker
-   - Create MQTT user and password
-   - Note the broker IP address
-
-3. **Upload to Arduino**:
-   - Connect Arduino R4 via USB-C
-   - Select board: Arduino Uno R4 WiFi
-   - Select correct COM port
-   - Click Upload
-
-4. **Monitor in Home Assistant**:
-   - Check Developer Tools → MQTT
-   - Subscribe to `home/arduino/#` to see all messages
-   - Verify sensor entities appear automatically
-
-5. **Test Controls**:
-   - Use Developer Tools → Services
-   - Call `mqtt.publish` to test relay control
-   - Example: `home/arduino/control/relay1` → `ON`

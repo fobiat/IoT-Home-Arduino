@@ -97,7 +97,7 @@ template:
           {% set c4 = 0.22469 %}
           {% set c5 = 0.00426 %}
           {{ (c1*t + c2 + c3*h - c4*h*c5*t) | round(1) }}
-          
+
       - name: "Arduino Dew Point"
         unit_of_measurement: "°C"
         state: >

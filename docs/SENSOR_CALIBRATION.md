@@ -19,12 +19,12 @@ void setup() {
 void loop() {
   float h = dht.readHumidity();
   float t = dht.readTemperature();
-  
+
   Serial.print("Temp: ");
   Serial.print(t);
   Serial.print(" Humidity: ");
   Serial.println(h);
-  
+
   delay(2000);
 }
 ```
@@ -69,7 +69,7 @@ void loop() {
   Serial.print(bmp280.readPressure() / 100.0);
   Serial.print(" hPa | Altitude: ");
   Serial.println(bmp280.readAltitude(1013.25));  // Use known sea level
-  
+
   delay(1000);
 }
 ```
@@ -103,10 +103,10 @@ int16_t accel_z_offset = 0;
 
 void calibrateMPU6050() {
   int16_t ax, ay, az;
-  
+
   // Place MPU6050 flat on table, no movement
   Serial.println("Calibrating... Keep still!");
-  
+
   int32_t sum_x = 0, sum_y = 0, sum_z = 0;
   for (int i = 0; i < 200; i++) {
     mpu6050.getAcceleration(&ax, &ay, &az);
@@ -115,11 +115,11 @@ void calibrateMPU6050() {
     sum_z += (az - 16384);  // 16384 is 1G
     delay(10);
   }
-  
+
   accel_x_offset = sum_x / 200;
   accel_y_offset = sum_y / 200;
   accel_z_offset = sum_z / 200;
-  
+
   Serial.println("Calibration complete!");
 }
 ```
@@ -154,17 +154,17 @@ void calibrateUltrasonic() {
     Serial.print("Place object at ");
     Serial.print(distance);
     Serial.println("cm, press button...");
-    
+
     while (digitalRead(BUTTON1) == HIGH);  // Wait for button
     delay(500);
-    
+
     int measured = getUltrasonicDistance();
     Serial.print("Measured: ");
     Serial.print(measured);
     Serial.print(" (Error: ");
     Serial.print(measured - distance);
     Serial.println("cm)");
-    
+
     delay(1000);
   }
 }
@@ -196,11 +196,11 @@ void calibrateSoil() {
   Serial.println("Dry calibration - remove sensor from water for 30s");
   delay(30000);
   int dry_value = analogRead(SOIL_MOISTURE_PIN);
-  
+
   Serial.println("Wet calibration - place in water");
   delay(10000);
   int wet_value = analogRead(SOIL_MOISTURE_PIN);
-  
+
   Serial.print("Dry: ");
   Serial.print(dry_value);
   Serial.print(" | Wet: ");
@@ -214,7 +214,7 @@ int getMoisturePercent() {
   int raw = analogRead(SOIL_MOISTURE_PIN);
   int dry_cal = 750;    // Adjust based on calibration
   int wet_cal = 200;    // Adjust based on calibration
-  
+
   int percent = map(raw, dry_cal, wet_cal, 0, 100);
   return constrain(percent, 0, 100);
 }
@@ -246,10 +246,10 @@ void calibrateSound() {
     delay(100);
   }
   baseline /= 100;
-  
+
   Serial.print("Noise floor: ");
   Serial.println(baseline);
-  
+
   #define SOUND_THRESHOLD (baseline + 50)
 }
 ```
@@ -281,13 +281,13 @@ if (analogRead(SOUND_SENSOR_PIN) > threshold) {
 void calibrateRain() {
   Serial.print("Dry reading: ");
   Serial.println(analogRead(RAIN_SENSOR_PIN));
-  
+
   // Spray water on sensor
   delay(2000);
-  
+
   Serial.print("Wet reading: ");
   Serial.println(analogRead(RAIN_SENSOR_PIN));
-  
+
   // Set threshold midway
   #define RAIN_THRESHOLD 500
 }
@@ -316,7 +316,7 @@ void calibrateTouch() {
     delay(50);
   }
   untouched /= 100;
-  
+
   Serial.println("Now touch sensor...");
   delay(3000);
   int touched = 0;
@@ -325,7 +325,7 @@ void calibrateTouch() {
     delay(50);
   }
   touched /= 100;
-  
+
   int threshold = (untouched + touched) / 2;
   Serial.print("Touch threshold: ");
   Serial.println(threshold);
@@ -343,16 +343,16 @@ void calibrateTouch() {
 void setup() {
   Serial.begin(115200);
   Wire.begin();
-  
+
   Serial.println("\n=== SENSOR CALIBRATION TOOL ===\n");
-  
+
   displayMenu();
 }
 
 void loop() {
   if (Serial.available() > 0) {
     char cmd = Serial.read();
-    
+
     switch (cmd) {
       case '1': calibrateDHT22(); break;
       case '2': calibrateBMP280(); break;
@@ -391,33 +391,33 @@ After calibrating all sensors:
 ```cpp
 void testAllSensors() {
   Serial.println("\n=== SENSOR TEST REPORT ===\n");
-  
+
   readAllSensors();
-  
+
   Serial.print("Temperature: ");
   Serial.print(sensorData.temperature);
   Serial.println("°C [Expect: 15-30]");
-  
+
   Serial.print("Humidity: ");
   Serial.print(sensorData.humidity);
   Serial.println("% [Expect: 20-80]");
-  
+
   Serial.print("Pressure: ");
   Serial.print(sensorData.pressure);
   Serial.println("hPa [Expect: 950-1050]");
-  
+
   Serial.print("Distance: ");
   Serial.print(sensorData.ultrasonic_distance);
   Serial.println("cm [Expect: 0-400]");
-  
+
   Serial.print("Soil: ");
   Serial.print(sensorData.soil_moisture);
   Serial.println(" [Expect: 200-800]");
-  
+
   Serial.print("Sound: ");
   Serial.print(sensorData.sound_level);
   Serial.println(" [Expect: 0-1023]");
-  
+
   Serial.print("Rain: ");
   Serial.println(sensorData.rain_detected ? "WET" : "DRY");
 }

@@ -370,4 +370,3 @@ To improve this project:
 **Arduino IDE Version**: 2.0+
 **Board**: Arduino Uno R4 WiFi
 ## Hardware / Tested Kit
-

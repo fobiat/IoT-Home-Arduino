@@ -4,7 +4,7 @@
 
 ### Root Files (Main Directory)
 - `README.md` - Full project overview
-- `PROJECT_SUMMARY.md` - Quick reference summary  
+- `PROJECT_SUMMARY.md` - Quick reference summary
 - `COMPONENT_INVENTORY.md` - What you have and what's used
 - `DEPLOYMENT_CHECKLIST.md` - Step-by-step setup guide
 - `.gitignore` - Git configuration

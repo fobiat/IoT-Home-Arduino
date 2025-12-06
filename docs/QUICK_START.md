@@ -310,4 +310,3 @@ Visit Home Assistant at `http://<host-ip>:8123` after it finishes starting.
 Notes:
 - `docker-compose.override.yml` brings up an `eclipse-mosquitto` service bound to port `1883`.
 - For production, secure MQTT with passwords and TLS and don't expose ports unnecessarily.
-
